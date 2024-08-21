@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netlify Cloud Function Demo</title>
+</head>
+<body>
+    <h1>Netlify Cloud Function Demo</h1>
+    <form id="greet-form">
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="greeting"></p>
+
+    <script>
+        document.getElementById('greet-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const response = await fetch('/.netlify/functions/greet', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: name })
+            });
+
+            const result = await response.json();
+            document.getElementById('greeting').textContent = result.message;
+        });
+    </script>
+</body>
+</html>
