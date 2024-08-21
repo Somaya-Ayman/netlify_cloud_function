@@ -19,13 +19,14 @@
             event.preventDefault();
 
             const name = document.getElementById('name').value;
-            const response = await fetch('/.netlify/functions/greet', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: name })
+            // Construct the query string
+            const response = await fetch(`/.netlify/functions/greet?name=${encodeURIComponent(name)}`, {
+                method: 'GET',  // Use GET method
             });
 
+            // Parse the JSON response
             const result = await response.json();
+            // Display the greeting message
             document.getElementById('greeting').textContent = result.message;
         });
     </script>
