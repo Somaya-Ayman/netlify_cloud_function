@@ -20,7 +20,7 @@
 
             const name = document.getElementById('name').value;
             // Construct the query string
-            const response = await fetch(`/.netlify/functions/greet?name=${encodeURIComponent(name)}`, {
+            const response = await fetch(`/.netlify/functions/hello-world?name=${encodeURIComponent(name)}`, {
                 method: 'GET',  // Use GET method
             });
 
